@@ -272,11 +272,18 @@ class Configuration:
     
 
     
-    # Supabase configuration
-    SUPABASE_URL: str
-    SUPABASE_ANON_KEY: str
-    SUPABASE_SERVICE_ROLE_KEY: str
+    # Database configuration
+    DATABASE_URL: str = ""
+    DB_HOST: str = ""
+    DB_PORT: str = "5432"
+    DB_NAME: str = ""
+    DB_USER: str = ""
+    DB_PASSWORD: str = ""
     
+    # Legacy Supabase (for backward compatibility)
+    SUPABASE_URL: str = ""
+    SUPABASE_ANON_KEY: str = ""
+    SUPABASE_SERVICE_ROLE_KEY: str = ""   
     # Redis configuration
     REDIS_HOST: str
     REDIS_PORT: int = 6379

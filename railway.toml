@@ -1,0 +1,58 @@
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+startCommand = "python start.py"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+[[services]]
+name = "postgres"
+source = "postgres:15"
+
+[[services]]
+name = "redis"
+source = "redis:7-alpine"
+
+[services.variables]
+REDIS_ARGS = "--save 60 1 --loglevel warning"
+
+[[services]]
+name = "backend"
+source = "backend"
+
+[services.build]
+builder = "DOCKERFILE"
+dockerfilePath = "backend/Dockerfile"
+
+[services.deploy]
+startCommand = "uv run gunicorn api:app --workers 2 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT --timeout 1800 --graceful-timeout 600 --keep-alive 1800 --max-requests 0 --max-requests-jitter 0 --forwarded-allow-ips '*' --worker-connections 2000 --worker-tmp-dir /dev/shm --preload --log-level info --access-logfile - --error-logfile - --capture-output --enable-stdio-inheritance --threads 2"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+
+[[services]]
+name = "worker"
+source = "backend"
+
+[services.build]
+builder = "DOCKERFILE"
+dockerfilePath = "backend/Dockerfile"
+
+[services.deploy]
+startCommand = "uv run dramatiq --skip-logging --processes 2 --threads 2 run_agent_background"
+
+[[services]]
+name = "frontend"
+source = "frontend"
+
+[services.build]
+builder = "DOCKERFILE"
+dockerfilePath = "frontend/Dockerfile"
+
+[services.deploy]
+startCommand = "node server.js"
+healthcheckPath = "/"
+healthcheckTimeout = 300
