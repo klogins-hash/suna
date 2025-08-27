@@ -1,6 +1,6 @@
 {
-  "name": "suna-build-service",
-  "description": "Build service for Suna repository",
+  "name": "suna-backend-build",
+  "description": "Build service for Suna backend",
   "billing": {
     "buildPlan": "nf-compute-400-16"
   },

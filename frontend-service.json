@@ -1,5 +1,5 @@
 {
-  "name": "suna-frontend",
+  "name": "suna-frontend-v2",
   "description": "Suna AI platform frontend with authentication bypass",
   "billing": {
     "deploymentPlan": "nf-compute-20"
@@ -15,7 +15,7 @@
       }
     },
     "internal": {
-      "id": "suna-frontend-build",
+      "id": "suna-frontend-build-v2",
       "branch": "devin/1756301458-northflank-no-auth-deployment",
       "buildArguments": {},
       "dockerFilePath": "/frontend/Dockerfile"

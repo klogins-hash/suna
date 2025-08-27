@@ -1,5 +1,5 @@
 {
-  "name": "suna-frontend-build",
+  "name": "suna-frontend-build-v2",
   "description": "Build service for Suna frontend",
   "billing": {
     "buildPlan": "nf-compute-400-16"
