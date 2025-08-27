@@ -1,24 +1,20 @@
 {
-  "name": "suna-backend",
+  "name": "suna-backend-final",
   "description": "Suna AI platform backend service with authentication bypass",
   "billing": {
-    "deploymentPlan": "nf-compute-20"
+    "deploymentPlan": "nf-compute-10"
   },
   "deployment": {
     "instances": 1,
     "docker": {
       "configType": "default"
     },
-    "storage": {
-      "ephemeralStorage": {
-        "storageSize": 1024
-      }
-    },
-    "internal": {
-      "id": "suna-backend-build",
+    "git": {
+      "projectUrl": "https://github.com/klogins-hash/suna",
+      "projectType": "github",
       "branch": "devin/1756301458-northflank-no-auth-deployment",
-      "buildArguments": {},
-      "dockerFilePath": "/backend/Dockerfile"
+      "dockerFilePath": "./backend/Dockerfile",
+      "dockerWorkDir": "./backend"
     }
   },
   "ports": [
