@@ -1,0 +1,39 @@
+{
+  "name": "suna-backend-final",
+  "description": "Suna AI platform backend service with authentication bypass",
+  "billing": {
+    "deploymentPlan": "nf-compute-10"
+  },
+  "deployment": {
+    "instances": 1,
+    "docker": {
+      "configType": "default"
+    },
+    "storage": {
+      "ephemeralStorage": {
+        "storageSize": 1024
+      }
+    },
+    "internal": {
+      "id": "suna-backend-build",
+      "branch": "devin/1756301458-northflank-no-auth-deployment",
+      "buildArguments": {},
+      "dockerFilePath": "./backend/Dockerfile"
+    }
+  },
+  "ports": [
+    {
+      "name": "http",
+      "internalPort": 8000,
+      "public": true,
+      "protocol": "HTTP"
+    }
+  ],
+  "runtimeEnvironment": {
+    "ENV_MODE": "production",
+    "DISABLE_AUTH": "true",
+    "PORT": "8000",
+    "API_KEY_SECRET": "demo-secret-key-for-deployment-12345",
+    "MCP_CREDENTIAL_ENCRYPTION_KEY": "demo-encryption-key-32-chars-long-abc"
+  }
+}

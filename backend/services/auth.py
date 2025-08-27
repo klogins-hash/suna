@@ -90,6 +90,19 @@ current_superuser = fastapi_users.current_user(active=True, superuser=True)
 # Compatibility functions for existing Supabase code
 async def get_current_user(request: Request) -> Optional[User]:
     """Get current user from request. Returns None if not authenticated."""
+    from utils.config import config
+    
+    if config.DISABLE_AUTH:
+        mock_user = User(
+            id=uuid.uuid4(),
+            email="demo@suna.so",
+            hashed_password="mock",
+            is_active=True,
+            is_superuser=False,
+            is_verified=True
+        )
+        return mock_user
+        
     try:
         user = await current_active_user(request)
         return user

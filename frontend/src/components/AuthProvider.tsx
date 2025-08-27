@@ -29,6 +29,33 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    if (process.env.NEXT_PUBLIC_DISABLE_AUTH === 'true') {
+      const mockUser = {
+        id: 'mock-user-id',
+        email: 'demo@suna.so',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        aud: 'authenticated',
+        role: 'authenticated',
+        app_metadata: {},
+        user_metadata: {},
+      } as User;
+      
+      const mockSession = {
+        access_token: 'mock-token',
+        refresh_token: 'mock-refresh',
+        expires_in: 3600,
+        expires_at: Date.now() + 3600000,
+        token_type: 'bearer',
+        user: mockUser,
+      } as Session;
+
+      setUser(mockUser);
+      setSession(mockSession);
+      setIsLoading(false);
+      return;
+    }
+
     const getInitialSession = async () => {
       try {
         const {

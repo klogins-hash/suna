@@ -1,0 +1,37 @@
+{
+  "name": "suna-frontend-final",
+  "description": "Suna AI platform frontend with authentication bypass",
+  "billing": {
+    "deploymentPlan": "nf-compute-10"
+  },
+  "deployment": {
+    "instances": 1,
+    "docker": {
+      "configType": "default"
+    },
+    "storage": {
+      "ephemeralStorage": {
+        "storageSize": 1024
+      }
+    },
+    "internal": {
+      "id": "suna-frontend-build-v2",
+      "branch": "devin/1756301458-northflank-no-auth-deployment",
+      "buildArguments": {},
+      "dockerFilePath": "./frontend/Dockerfile"
+    }
+  },
+  "ports": [
+    {
+      "name": "http",
+      "internalPort": 3000,
+      "public": true,
+      "protocol": "HTTP"
+    }
+  ],
+  "runtimeEnvironment": {
+    "NEXT_PUBLIC_DISABLE_AUTH": "true",
+    "NEXT_PUBLIC_API_URL": "https://http--suna-backend-final--f7q8xp57z6q9.code.run",
+    "PORT": "3000"
+  }
+}
