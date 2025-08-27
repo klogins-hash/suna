@@ -260,6 +260,8 @@ class Configuration:
     MORPH_API_KEY: Optional[str] = None
     GEMINI_API_KEY: Optional[str] = None
     OPENROUTER_API_BASE: Optional[str] = "https://openrouter.ai/api/v1"
+    
+    DISABLE_AUTH: bool = False
     OPENAI_COMPATIBLE_API_KEY: Optional[str] = None
     OPENAI_COMPATIBLE_API_BASE: Optional[str] = None
     OR_SITE_URL: Optional[str] = "https://kortix.ai"
@@ -438,6 +440,9 @@ class Configuration:
     
     def _validate(self):
         """Validate configuration based on type hints."""
+        if self.DISABLE_AUTH:
+            return
+            
         # Get all configuration fields and their type hints
         type_hints = get_type_hints(self.__class__)
         
@@ -469,4 +474,4 @@ class Configuration:
         }
 
 # Create a singleton instance
-config = Configuration() 
+config = Configuration()    

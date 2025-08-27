@@ -148,6 +148,15 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Providers>
+            {process.env.NEXT_PUBLIC_DISABLE_AUTH === 'true' && (
+              <script dangerouslySetInnerHTML={{
+                __html: `
+                  if (window.location.pathname === '/' || window.location.pathname === '/auth') {
+                    window.location.href = '/dashboard';
+                  }
+                `
+              }} />
+            )}
             {children}
             <Toaster />
           </Providers>
