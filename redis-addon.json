@@ -1,0 +1,9 @@
+{
+  "name": "redis",
+  "type": "redis",
+  "version": "7.0",
+  "replicas": 1,
+  "typeOptions": {
+    "storage": "1Gi"
+  }
+}
