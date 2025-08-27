@@ -9,12 +9,16 @@
     "docker": {
       "configType": "default"
     },
-    "git": {
-      "projectUrl": "https://github.com/klogins-hash/suna",
-      "projectType": "github",
+    "storage": {
+      "ephemeralStorage": {
+        "storageSize": 1024
+      }
+    },
+    "internal": {
+      "id": "suna-backend-build",
       "branch": "devin/1756301458-northflank-no-auth-deployment",
-      "dockerFilePath": "./backend/Dockerfile",
-      "dockerWorkDir": "./backend"
+      "buildArguments": {},
+      "dockerFilePath": "./backend/Dockerfile"
     }
   },
   "ports": [
